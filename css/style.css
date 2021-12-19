@@ -60,8 +60,8 @@ input[type=button]:hover {
 .gallery__content {
   max-width: 850px;
   min-width: 310px;
-  min-height: 70vh;
-  max-height: 70vh;
+  min-height: 67vh;
+  max-height: 67vh;
   padding-top: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   resize: both;
