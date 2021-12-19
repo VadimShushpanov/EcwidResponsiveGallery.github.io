@@ -179,11 +179,29 @@ input[type=button]:hover {
   }
   .page{
     margin: 0;
+    padding: 0px 5px;
   }
   .page,
   .page button,
   .page input,
   .page label {
     font-size: 14px;
+  }
+}
+@media (max-width: 500px) {
+  .loader-images input {
+    margin: 5px;
+  }
+  .gallery__content {
+    min-width: 300px;
+  }
+  .gallery__div {
+    min-width: 100px;
+    min-height: 100px;
+    max-height: 100px;
+
+  }
+  .gallery__img {
+    max-height: 100px;
   }
 }

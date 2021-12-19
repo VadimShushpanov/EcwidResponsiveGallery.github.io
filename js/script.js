@@ -44,7 +44,6 @@ function loadJsonLink(url) {
       if (err !== null) {
         alert('Something went wrong: ' + err);
       } else {
-        result;
         jsonParse(result);
         addImgs();
       }
@@ -61,8 +60,6 @@ function buttonLoadImg(inputField) {
       image.src = e.target.result;
       image.onload = function () {
         images['properties'] = Object.assign({}, { "url": url, "width": this.width, "height": this.height });
-        
-
         addImgs();
       }
     });
