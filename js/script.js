@@ -26,16 +26,8 @@ function isJson(url) {
 }
 
 function loadImgLink(url) {
-  let image = new Image();
-  image.classList.add('gallery__img');
-  image.src = url;
-  image.onload = function () {
-    images['properties'] = Object.assign({}, { "url": url, "width": this.width, "height": this.height });
+    images['properties'] = Object.assign({}, { "url": url});
     addImgs();
-  }
-  image.onerror = function () {
-    alert("Ошибка во время загрузки изображения");
-  };
 }
 
 function loadJsonLink(url) {
@@ -44,7 +36,7 @@ function loadJsonLink(url) {
       if (err !== null) {
         alert('Something went wrong: ' + err);
       } else {
-        jsonParse(result);
+        images = result["galleryImages"];
         addImgs();
       }
     });
@@ -52,28 +44,22 @@ function loadJsonLink(url) {
 
 function buttonLoadImg(inputField) {
   if (inputField.files && inputField.files[0]) {
-    var reader = new FileReader();
+    let reader = new FileReader();
     $(reader).load(function (e) {
-      let url = e.target.result;
-      let image = new Image();
-      image.classList.add('gallery__img-' + $('.gallery__content img').length);
-      image.src = e.target.result;
-      image.onload = function () {
-        images['properties'] = Object.assign({}, { "url": url, "width": this.width, "height": this.height });
-        addImgs();
-      }
+      images['properties'] = Object.assign({}, { "url": e.target.result});
+      addImgs();
     });
     reader.readAsDataURL(inputField.files[0]);
   }
 }
 
 function buttonLoadJson(inputField) {
-  let file = null;
+
   if (inputField.files && inputField.files[0]) {
-    file = new FileReader();
+    let file = new FileReader();
     file.onload = function () {
-      result = JSON.parse(file.result);
-      jsonParse(result);
+      let result = JSON.parse(file.result);
+      images = result["galleryImages"];
       addImgs();
     };
     file.onerror = function () {
@@ -81,16 +67,6 @@ function buttonLoadJson(inputField) {
     };
     file.readAsText(inputField.files[0]);
   }
-}
-
-function jsonParse(result) {
-  Object.entries(result).forEach(
-    ([key, value]) => {
-      Object.entries(value).forEach(([key, value]) => {
-        images['properties-' + Number(key)] = Object.assign({}, value);
-      });
-    }
-  );
 }
 
 function uploadImages() {
@@ -145,11 +121,11 @@ function addImgs() {
 
     $(block).append(photo);
     $(block).append(button);
-    $('.gallery__button-delete').click(function() {
-      $(this).parent().remove();
-    });
   });
 
+  $('.gallery__button-delete').click(function() {
+    $(this).parent().remove();
+  });
   $('.loader-images__input').val('');
   $('.loader-images__file-name').text('');
   $('.loader-images__input-file').val('');
@@ -210,7 +186,7 @@ $( document ).ready(function() {
       if (isImg(file.type)) {
       
         makePreview(file).then(image => {
-          images['properties'] = Object.assign({}, { "url": image, "width": this.width, "height": this.height });
+          images['properties'] = Object.assign({}, { "url": image});
           addImgs();
         });
 
