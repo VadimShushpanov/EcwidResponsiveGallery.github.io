@@ -1,0 +1,27 @@
+{
+  "name": "ecwidresponsivegallery.github.io",
+  "version": "1.0.0",
+  "description": "- Картинки галереи размещаются рядами. Количество рядов не ограничено. - Ряды одинаковы по ширине и по высоте.  - Картинки в одном ряду одинаковы по высоте. - У картинок сохранены пропорции. - Интерфейс responsive, максимальная ширина контейнера — 860 px, минимальная – 320 px. - Количество картинок в каждом ряду не фиксировано. При сужении/расширении галереи их количество может меняться.  - На картинки приятно смотреть: на мобильных они не слишком мелкие, на десктопах не слишком крупными. - Добавлены плейсхолдеры на время загрузки. Внешний вид выберан на своё усмотрение. - Предусмотрена возможность добавлять картинки drag-n-drop в галерею. - Добавлена возможность удалить картинку из галереи.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "dev": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VadimShushpanov/EcwidResponsiveGallery.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VadimShushpanov/EcwidResponsiveGallery.github.io/issues"
+  },
+  "homepage": "https://github.com/VadimShushpanov/EcwidResponsiveGallery.github.io#readme",
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "gulp": "^4.0.2",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.0.0",
+    "sass": "^1.45.0"
+  }
+}
