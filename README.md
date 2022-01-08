@@ -14,7 +14,7 @@
 
 # bash
 # установить зависимости
-npm install
+yarn install
 
 # запустить локальный сервер localhost:8080
-npm start dev
+yarn run dev
