@@ -1,4 +1,5 @@
 let images = new Object();
+let image = new Image();
 let regExpJson = /(\.|\/)(json)$/;
 let regExpImg = /(\.|\/)(gif|jpg|jpeg|tiff|png)$/;
 
@@ -26,8 +27,14 @@ function isJson(url) {
 }
 
 function loadImgLink(url) {
-  images["properties"] = Object.assign({}, { url: url });
-  addImgs();
+  image.src = url;
+  image.onload = function () {
+    images["properties"] = Object.assign(
+      {},
+      { url: url, width: this.width, height: this.height }
+    );
+    addImgs();
+  };
 }
 
 function loadJsonLink(url) {
@@ -45,14 +52,20 @@ function buttonLoadImg(inputField) {
   if (inputField.files && inputField.files[0]) {
     let reader = new FileReader();
     $(reader).load(function (e) {
-      images["properties"] = Object.assign({}, { url: e.target.result });
-      addImgs();
+      image.src = e.target.result;
+      image.onload = function () {
+        images["properties"] = Object.assign(
+          {},
+          { url: e.target.result, width: this.width, height: this.height }
+        );
+        addImgs();
+      };
     });
     reader.readAsDataURL(inputField.files[0]);
   }
 }
 
-function buttonLoadJson(inputField) {
+function loadJson(inputField) {
   let jsonFile =
     inputField.files && inputField.files[0] ? inputField.files[0] : inputField;
   let file = new FileReader();
@@ -93,7 +106,7 @@ function uploadImages() {
     if (isImg(uploadFile)) {
       buttonLoadImg(inputField);
     } else if (isJson(uploadFile)) {
-      buttonLoadJson(inputField);
+      loadJson(inputField);
     } else {
       alert("Неверный формат файла");
       $(".loader-images__file-name").text("");
@@ -112,7 +125,12 @@ function addImgs() {
     button.classList.add("gallery__button-delete");
     block.classList.add("gallery__div");
 
+    img.width = (img.width * 140) / img.height;
+
+    $(photo).css({ width: img.width });
+
     photo.src = img.url;
+
     $(".gallery__content").append(block);
 
     $(block).append(photo);
@@ -139,7 +157,6 @@ function chooseFile() {
   $(".loader-images__input-file").click();
   $(".loader-images__input").val("");
 }
-
 function removeUploadedFile() {
   $(".loader-images__input-file").val("");
   $(".loader-images__file-name").text("");
@@ -179,18 +196,32 @@ $(document).ready(function () {
 
         let files = e.dataTransfer.files;
 
-        files = [...files];
-
-        files.forEach((file) => {
+        Object.entries(files).forEach(([key, file]) => {
           formData.append("file", file);
 
           if (isImg(file.type)) {
-            makePreview(file).then((image) => {
-              images["properties"] = Object.assign({}, { url: image });
-              addImgs();
+            let reader = new FileReader();
+            $(reader).load(function (e) {
+              image.src = e.target.result;
+              if (image.width === 0 || image.height === 0) {
+                image.onload = function () {
+                  images["properties-" + key] = Object.assign(
+                    {},
+                    { url: image.src, width: image.width, height: image.height }
+                  );
+                  addImgs();
+                };
+              } else {
+                images["properties-" + key] = Object.assign(
+                  {},
+                  { url: image.src, width: image.width, height: image.height }
+                );
+                addImgs();
+              }
             });
+            reader.readAsDataURL(file);
           } else if (isJson(file.type)) {
-            buttonLoadJson(file);
+            loadJson(file);
           } else {
             alert(`Файл ${file.name} не является изображением`);
           }
@@ -199,13 +230,4 @@ $(document).ready(function () {
       false
     )
   );
-
-  function makePreview(file) {
-    let fr = new FileReader();
-
-    return new Promise((resolve) => {
-      fr.readAsDataURL(file);
-      fr.onloadend = () => resolve(fr.result);
-    });
-  }
 });

@@ -19,144 +19,139 @@ $galery-background: #ededed;
 
 button:hover,
 input[type=button]:hover {
-  cursor: pointer;
-  box-shadow: 0 0 5px #2598a3;
-  background: #51e5f3;
-  transform: scale(1.1);
+cursor: pointer;
+box-shadow: 0 0 5px #2598a3;
+background: #51e5f3;
+transform: scale(1.1);
 }
 
 .loader-images {
-  margin: 10px 0px;
+margin: 10px 0px;
 }
 
 .loader-images__input-file {
-  display: none;
+display: none;
 }
 
 .loader-images__file-name {
-  font: 400 13.3333px Arial;
+font: 400 13.3333px Arial;
 }
 
 .gallery__links {
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
 }
 
 .gallery {
-  max-width: 860px;
-  margin: 0 auto;
+max-width: 860px;
+margin: 0 auto;
 }
 
 .gallery__content {
-  max-width: 850px;
-  min-width: 310px;
-  min-height: 67vh;
-  max-height: 67vh;
-  padding-top: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  resize: both;
-  user-select: none;
-  overflow: auto;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 5px;
-  align-content: flex-start;
+max-width: 850px;
+min-width: 310px;
+min-height: 67vh;
+max-height: 67vh;
+padding-top: 5px;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+resize: both;
+user-select: none;
+overflow: auto;
+display: flex;
+flex-wrap: wrap;
+padding: 5px;
+align-content: flex-start;
+
 }
 
 .gallery__content:empty {
-  position: relative;
-  background-image: url(../images/upload.svg);
-  background-size: 100px;
-  background-repeat: no-repeat;
-  background-position: center 43%;
+position: relative;
+background-image: url(../images/upload.svg);
+background-size: 100px;
+background-repeat: no-repeat;
+background-position: center 43%;
 }
 
 .gallery__img {
-  object-fit: cover;
-  max-height: 140px;
-  flex-grow: 1;
-} 
+flex: 1 1 auto;
+max-width: 100%;
+}
 
 .gallery__content:empty:before {
-  content: 'Drag image';
-  white-space: nowrap;
-  font-family: sans-serif;
-  font-size: 35px;
-  font-weight: bold;
-  color: #000000de;
-  position: absolute;
-  top: 58%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} 
+content: 'Drag image';
+white-space: nowrap;
+font-family: sans-serif;
+font-size: 35px;
+font-weight: bold;
+color: #000000de;
+position: absolute;
+top: 58%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
 
 .gallery__content:after {
-  flex-grow: 10;
-  content: '';
-} 
+flex-grow: 10;
+content: '';
+}
 
 .gallery__div {
-  display: flex;
-  flex-grow: 1;
-  margin: 5px;
-  min-height: 140px;
-  position: relative;
-  min-width: 160px; 
-  background-color: grey;
-  background-image: url("../images/Placeholder_view_vector.svg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+display: flex;
+margin: 5px;
+min-height: 160px;
+position: relative;
+background-color: #d0d0d0;
+flex: 1 1 auto;
 }
 
 .gallery__button-delete {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  background: #989a9e;
-  visibility: hidden;
+position: absolute;
+right: 10px;
+top: 10px;
+width: 20px;
+height: 20px;
+cursor: pointer;
+background: #989a9e;
+visibility: hidden;
 }
 
 .gallery__button-delete::before,
 .gallery__button-delete::after {
-    content: "";
-    position: absolute;
-    top: 6px;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: #000;
-    border-radius: 4px;
+content: "";
+position: absolute;
+top: 6px;
+left: 0;
+right: 0;
+height: 4px;
+background: #000;
+border-radius: 4px;
 }
 
 .gallery__button-delete::before {
-  transform: rotate(-45deg)
+transform: rotate(-45deg)
 }
 
 .gallery__button-delete::after {
-  transform: rotate(45deg)
+transform: rotate(45deg)
 }
 
 .gallery__content.hover:empty:before {
-  content: 'Drop';
+content: 'Drop';
 }
 
 .gallery__content.hover {
-  border: solid 2px #2598a3;
-  background-color: white;
-  border-radius: 5px;
+border: solid 2px #2598a3;
+background-color: white;
+border-radius: 5px;
 }
 
 .gallery__button-delete:hover {
-  transform: scale(1.1);
-  background-color: white;
+transform: scale(1.1);
+background-color: white;
 }
 
 .gallery__div:hover .gallery__button-delete {
-  visibility: visible;
+visibility: visible;
 }
 
 @media (max-width: 768px) {
