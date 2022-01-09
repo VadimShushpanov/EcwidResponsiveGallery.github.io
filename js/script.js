@@ -127,7 +127,7 @@ function addImgs() {
 
     img.width = (img.width * 140) / img.height;
 
-    $(photo).css({ width: img.width });
+    $(block).css({ width: img.width });
 
     photo.src = img.url;
 
