@@ -33,9 +33,13 @@ input[type="button"]:hover {
   display: none;
 }
 
-.gallery__links {
+.links {
   display: flex;
   flex-direction: column;
+}
+
+.links__item {
+  word-break: break-all;
 }
 
 .gallery__content {
