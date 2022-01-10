@@ -12,20 +12,20 @@
 
 <body class="gallery">
     <h2 class="gallery__title">Responsive Gallery</h2>
-    <div class="links">
-      <span class="links__title">Ссылки, которыми можно воспользоваться:</span>
-      <span class="links__item">https://don16obqbay2c.cloudfront.net/frontend-test-task/gallery-images.json</span>
-      <span class="links__item">https://tion.ru/wp-content/uploads/2019/03/gipoallergennye-zhivotnye-01.jpg</span>
-      <span class="links__item">https://i.ytimg.com/vi/M64fYJgtl-Q/maxresdefault.jpg</span>
+    <div class="info">
+      <span class="info__title">Ссылки, которыми можно воспользоваться:</span>
+      <span class="info__text">https://don16obqbay2c.cloudfront.net/frontend-test-task/gallery-images.json</span>
+      <span class="info__text">https://tion.ru/wp-content/uploads/2019/03/gipoallergennye-zhivotnye-01.jpg</span>
+      <span class="info__text">https://i.ytimg.com/vi/M64fYJgtl-Q/maxresdefault.jpg</span>
     </div>
     <div class='loader-images'>
-      <input class="loader-images__input" placeholder="Введите URL" onchange="removeUploadedFile()" />
-      <input class="loader-images__btn-upload" type="button" onclick="uploadImages()" value="Загрузить" />
-      <input class="loader-images__btn-choose-file" type="button" onclick="chooseFile()" value="Выбрать файл" />
-      <label class="loader-images__file-name"></label>
-      <input class="loader-images__btn-clear" type="button" onclick="clearGallery('Y')" value="Очистить галлерею" />
-      <input class="loader-images__input-file" type="file" onchange="getFileName()" />
+      <input class="loader-images__input input" placeholder="Введите URL" onchange="removeUploadedFile()" />
+      <input class="loader-images__btn-upload input" type="button" onclick="uploadImages()" value="Загрузить" />
+      <input class="loader-images__btn-choose-file input" type="button" onclick="chooseFile()" value="Выбрать файл" />
+      <label class="loader-images__file-name label"></label>
+      <input class="loader-images__btn-clear input" type="button" onclick="clearGallery('Y')" value="Очистить галлерею" />
+      <input class="loader-images__input-file input" type="file" onchange="getFileName()" />
     </div>
-    <div class="gallery__content" id="gallery__content"  ondragstart="return false;"> </div>
+    <div class="gallery__content" ondragstart="return false;"> </div>
 </body>
 </html>

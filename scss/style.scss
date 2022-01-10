@@ -4,9 +4,9 @@
 }
 
 .gallery,
-button,
-input,
-label {
+.button,
+.input,
+.label {
   background: #ededed;
   font-family: sans-serif;
   font-size: 18px;
@@ -14,8 +14,8 @@ label {
   border-radius: 5px;
 }
 
-button:hover,
-input[type="button"]:hover {
+.button:hover,
+.input[type="button"]:hover {
   cursor: pointer;
   box-shadow: 0 0 5px #2598a3;
   background: #51e5f3;
@@ -24,7 +24,7 @@ input[type="button"]:hover {
 
 .loader-images {
   margin: 10px 0px;
-  input {
+  .input {
     margin: 5px 5px 5px 0px;
   }
 }
@@ -33,12 +33,12 @@ input[type="button"]:hover {
   display: none;
 }
 
-.links {
+.info {
   display: flex;
   flex-direction: column;
 }
 
-.links__item {
+.info__text {
   word-break: break-all;
 }
 
@@ -62,13 +62,13 @@ input[type="button"]:hover {
 }
 
 .gallery__content:empty:before {
+  content: "Drag image";
   background-image: url(../images/upload.svg);
-  width: 200px;
-  height: 200px;
   background-size: 100px;
   background-repeat: no-repeat;
   background-position: center 43%;
-  content: "Drag image";
+  width: 200px;
+  height: 200px;
   white-space: nowrap;
   font-family: sans-serif;
   font-size: 35px;
@@ -133,11 +133,11 @@ input[type="button"]:hover {
   transform: rotate(45deg);
 }
 
-.gallery__content.hover:empty:before {
+.gallery__content_hover:empty:before {
   content: "Drop";
 }
 
-.gallery__content.hover {
+.gallery__content_hover {
   border: solid 2px #2598a3;
   background-color: white;
   border-radius: 5px;

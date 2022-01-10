@@ -122,7 +122,7 @@ function addImgs() {
     let button = document.createElement("button");
 
     photo.classList.add("gallery__img");
-    button.classList.add("gallery__button-delete");
+    button.classList.add("gallery__button-delete", "button");
     block.classList.add("gallery__div");
 
     img.width = (img.width * 140) / img.height;
@@ -174,60 +174,67 @@ $(document).ready(function () {
       uploadImages();
     }
   });
+  let galleryContents = document.querySelectorAll(".gallery__content");
 
-  let formData = new FormData();
+  for (let galleryContent of galleryContents) {
+    let formData = new FormData();
 
-  gallery__content.addEventListener("dragenter", function () {
-    $(".gallery__content").addClass("hover");
-  });
+    galleryContent.addEventListener("dragenter", function () {
+      $(".gallery__content").addClass("gallery__content_hover");
+    });
 
-  ["drop", "dragleave"].forEach((eventName) =>
-    gallery__content.addEventListener(eventName, function () {
-      $(".gallery__content").removeClass("hover");
-    })
-  );
+    ["drop", "dragleave"].forEach((eventName) =>
+      galleryContent.addEventListener(eventName, function () {
+        $(".gallery__content").removeClass("gallery__content_hover");
+      })
+    );
 
-  ["drop", "dragover"].forEach((eventName) =>
-    gallery__content.addEventListener(
-      eventName,
-      function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    ["drop", "dragover"].forEach((eventName) =>
+      galleryContent.addEventListener(
+        eventName,
+        function (e) {
+          e.preventDefault();
+          e.stopPropagation();
 
-        let files = e.dataTransfer.files;
+          let files = e.dataTransfer.files;
 
-        Object.entries(files).forEach(([key, file]) => {
-          formData.append("file", file);
+          Object.entries(files).forEach(([key, file]) => {
+            formData.append("file", file);
 
-          if (isImg(file.type)) {
-            let reader = new FileReader();
-            $(reader).load(function (e) {
-              image.src = e.target.result;
-              if (image.width === 0 || image.height === 0) {
-                image.onload = function () {
+            if (isImg(file.type)) {
+              let reader = new FileReader();
+              $(reader).load(function (e) {
+                image.src = e.target.result;
+                if (image.width === 0 || image.height === 0) {
+                  image.onload = function () {
+                    images["properties-" + key] = Object.assign(
+                      {},
+                      {
+                        url: image.src,
+                        width: image.width,
+                        height: image.height,
+                      }
+                    );
+                    addImgs();
+                  };
+                } else {
                   images["properties-" + key] = Object.assign(
                     {},
                     { url: image.src, width: image.width, height: image.height }
                   );
                   addImgs();
-                };
-              } else {
-                images["properties-" + key] = Object.assign(
-                  {},
-                  { url: image.src, width: image.width, height: image.height }
-                );
-                addImgs();
-              }
-            });
-            reader.readAsDataURL(file);
-          } else if (isJson(file.type)) {
-            loadJson(file);
-          } else {
-            alert(`Файл ${file.name} не является изображением`);
-          }
-        });
-      },
-      false
-    )
-  );
+                }
+              });
+              reader.readAsDataURL(file);
+            } else if (isJson(file.type)) {
+              loadJson(file);
+            } else {
+              alert(`Файл ${file.name} не является изображением`);
+            }
+          });
+        },
+        false
+      )
+    );
+  }
 });
