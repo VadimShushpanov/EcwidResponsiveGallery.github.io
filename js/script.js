@@ -204,15 +204,16 @@ $(document).ready(function () {
             if (isImg(file.type)) {
               let reader = new FileReader();
               $(reader).load(function (e) {
-                image.src = e.target.result;
                 if (image.width === 0 || image.height === 0) {
-                  image.onload = function () {
+                  let img = new Image();
+                  img.src = e.target.result;
+                  img.onload = function () {
                     images["properties-" + key] = Object.assign(
                       {},
                       {
-                        url: image.src,
-                        width: image.width,
-                        height: image.height,
+                        url: img.src,
+                        width: img.width,
+                        height: img.height,
                       }
                     );
                     addImgs();
@@ -220,12 +221,29 @@ $(document).ready(function () {
                 } else {
                   images["properties-" + key] = Object.assign(
                     {},
-                    { url: image.src, width: image.width, height: image.height }
+                    {
+                      url: e.target.result,
+                    }
                   );
-                  addImgs();
                 }
               });
               reader.readAsDataURL(file);
+
+              Object.entries(images).forEach(([key, img]) => {
+                image.src = img.src;
+                image.onload = function () {
+                  images["properties-" + key] = Object.assign(
+                    {},
+                    {
+                      url: image.src,
+                      width: image.width,
+                      height: image.height,
+                    }
+                  );
+                };
+              });
+
+              addImgs();
             } else if (isJson(file.type)) {
               loadJson(file);
             } else {
